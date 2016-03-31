@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
+
+  <style>
+    /* step 3 */
+    .paragraph {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    var dataset = [20, 60, 110, 500];
+
+    var canvas = d3.select("body")
+                  .append("svg")
+                  .attr("width", 500)
+                  .attr("height", 500);
+
+    var bars = canvas.selectAll("rect")
+                .data(dataset)
+                .enter()  // loop
+                  .append("rect")
+                  .attr("width", function(value) {
+                    return value;
+                  })
+                  .attr("height", 30)
+                  .attr("y", function (value, index) {
+                    return index * 50;
+                  });
+
+    // step 2
+    d3.select('body').selectAll('h1')  // selection
+      .data(dataset)  // data binding
+      .enter() // loop
+        .append('h1')  // dom manipulation
+        .attr('class', 'paragraph')  // static property
+        .text(function(value, index) {  // dynamic property
+          return index + ': my value is ' + value;
+        })
+        .style('font-size', function(value) {
+          return (value / 2 + 25) + 'px';  // maps to [25, 50]
+        });
+  </script>
+</body>
+</html>

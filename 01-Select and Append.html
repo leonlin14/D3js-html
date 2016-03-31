@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Document</title>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
+  
+  <style>
+    /* step 3 */
+    h1 {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <p>hi, this is a text</p>
+
+  <!-- step 2 -->
+  <div class="test">
+    <p></p>
+    <h1>cqwdqwjio</h1>
+  </div>
+
+  <script>
+
+    // d3.select("p").text("hello");
+    d3.select("body")
+    	.append("p")
+    	.style("color", "red")
+    	.text("hello");
+
+    // console.log(d3)
+
+    // step 2
+    var p = d3.select(".test").selectAll("p")
+      .data([4, 8, 15, 16, 23, 42]);
+
+    p.enter().append("p")
+      .text(function(d) { return d + 2; });
+
+  </script>
+</body>
+</html>

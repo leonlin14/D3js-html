@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
+</head>
+<body>
+
+  <script>
+    var canvas = d3.select("body")
+                  .append("svg")
+                  .attr("width", 500)
+                  .attr("height", 500);
+
+    var circle = canvas.append("circle")
+                  .attr("cx", 50)
+                  .attr("cy", 50)
+                  .attr("r", 20)
+                  .attr("fill", "green");
+
+    circle.transition()
+      .duration(2000) // smooth
+      .delay(1000)
+      .attr("cx", 200)
+      .transition()
+      .attr("cy", 300)
+      .each("end", function() {
+        d3.select(this).attr("fill", "red");
+      });
+  </script>
+</body>
+</html>

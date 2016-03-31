@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
+</head>
+<body>
+
+  <script>
+    var dataset = [10, 20, 40];
+
+    // console.log(d3.min(dataset));
+    // console.log(d3.max(dataset));
+    // console.log(d3.extent(dataset));
+    // console.log(d3.sum(dataset));
+    // console.log(d3.mean(dataset));
+
+    var canvas = d3.select("body").append("svg")
+                  .attr("width", 1500)
+                  .attr("height", 1500);
+
+    var group = canvas.append("g")
+                  .attr("transform", "translate(300, 300)");
+
+    var r = 300;
+
+    var color = d3.scale.ordinal()
+                  .range(["red", "blue", "orange"]);
+
+    var arc = d3.svg.arc()
+                .innerRadius(200)
+                .outerRadius(r);
+
+    var pie = d3.layout.pie()
+                .value(function(value) { return value });
+
+    var arcs = group.selectAll(".arc")
+                .data(pie(dataset))
+                .enter()
+                .append("g")
+                .attr("class", "arc");
+
+    arcs.append("path")
+      .attr("d", arc)
+      .attr("fill", function(value) {
+          return color(value.data);
+      });
+
+    arcs.append("text")
+      .attr("transform", function(value) {
+          return "translate(" + arc.centroid(value) + ")";
+      })
+      .attr("text-anchor", "middle")
+      .attr("font-size", 28)
+      .text(function(value) {
+          return value.data;
+      });
+
+  </script>
+</body>
+</html>
